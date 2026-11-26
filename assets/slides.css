@@ -1,0 +1,33 @@
+/* v2.1: fixed viewport, discrete scenes. Normal document remains the no-JS fallback. */
+.deck-nav[hidden]{display:none}
+.deck-mode{scroll-behavior:auto;overflow:hidden;scroll-padding:0}
+.deck-mode body{height:100dvh;overflow:hidden}
+.deck-mode main{position:fixed;inset:0;overflow:hidden;isolation:isolate}
+.deck-mode main>section{position:absolute;inset:0;height:100%;min-height:0;margin:0;overflow:hidden;display:none}
+.deck-mode main>section.deck-active{display:flex;flex-direction:column;visibility:visible}
+.deck-mode main>section:not(.hero){padding:calc(var(--hh) + 26px) 0 88px;justify-content:safe center;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.deck-mode main>section>.wrap{flex-shrink:0}
+.deck-mode .hero-inner{height:100%;justify-content:center;padding-top:var(--hh);padding-bottom:78px;overflow-y:auto;overscroll-behavior:contain}
+.deck-mode .hero-main{padding-block:22px}
+.deck-mode .hero-base{bottom:80px}.deck-mode .hero-index{display:none}.deck-mode .hero-base .scroll-link{font-size:12px}
+.deck-mode .section-label{margin-bottom:clamp(16px,3.1vh,34px);padding-top:12px}
+.deck-mode .section h2{font-size:clamp(34px,min(5vw,6.5vh),70px);line-height:1.03}
+.deck-mode .about-intro,.deck-mode .heading-pair{margin-bottom:clamp(20px,3.4vh,40px);gap:6%}
+.deck-mode .body-large,.deck-mode .heading-pair p{font-size:clamp(14px,1.9vh,18px);line-height:1.5}
+.deck-mode .statements article{min-height:clamp(184px,34vh,320px)}
+.deck-mode .statement-text{padding:18px 24px}.deck-mode .statement-text h3{font-size:clamp(17px,2.4vh,26px);line-height:1.25;margin-top:8px}
+.deck-mode .statement-art{inset:0 0 64px}.deck-mode .statement-art svg{max-height:170px}
+.deck-mode .service-visual{min-height:0;padding:18px}.deck-mode .service-visual svg{max-height:clamp(140px,30vh,290px)}
+.deck-mode .service-item button{padding:clamp(8px,1.65vh,18px) 0;font-size:clamp(17px,2.55vh,24px)}.deck-mode .service-item p{font-size:14px;line-height:1.45;padding-bottom:12px}
+.deck-mode .process-grid article{padding:16px 18px}.deck-mode .process-grid article:first-child{padding-left:0}.deck-mode .process-grid h3{margin:clamp(14px,3vh,30px) 0 8px;font-size:24px}
+.deck-mode .process-grid p,.deck-mode .value-row p,.deck-mode .sector-row p{font-size:14px;line-height:1.45}
+.deck-mode .values-layout{margin-top:clamp(22px,4vh,50px);gap:6%}.deck-mode .values-layout>h3{font-size:clamp(27px,3.8vh,45px);margin:0}.deck-mode .value-row{padding:10px 0}.deck-mode .value-row h3{font-size:18px;margin-bottom:4px}
+.deck-mode .sector-row{padding:20px 0}.deck-mode .contact-layout h2{font-size:clamp(46px,7vw,100px)}
+.deck-mode footer{display:none}.deck-mode .deck-footer{border-top:1px solid var(--line);margin-top:clamp(30px,7vh,76px);padding-top:18px;display:flex;justify-content:space-between;gap:24px;font-size:12px;color:var(--muted)}.deck-mode .deck-footer p{margin:0;max-width:430px}
+.deck-mode .deck-nav{position:fixed;z-index:60;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:6px 8px;border:1px solid var(--line);background:var(--header);border-radius:40px;box-shadow:0 6px 28px #0002;max-width:calc(100% - 24px)}
+.deck-links{display:flex;align-items:center;gap:2px}.deck-links a{font-size:11px;color:var(--muted);padding:8px 10px;border-radius:24px;white-space:nowrap;transition:background .18s,color .18s}.deck-links a[aria-current=page]{color:var(--cta-ink);background:var(--cta)}.deck-arrow{border:0;background:none;min-width:32px;height:32px;border-radius:50%;color:var(--accent);font-size:18px}.deck-arrow:disabled{opacity:.28;cursor:default}.deck-count{font-size:11px;letter-spacing:.04em;color:var(--muted);white-space:nowrap;margin:0 3px;font-variant-numeric:tabular-nums}
+.deck-mode .deck-active.deck-enter>.wrap{animation:scene-in .58s cubic-bezier(.2,.75,.25,1) both}.deck-mode .deck-active.deck-enter .hero-main{animation:scene-in .65s cubic-bezier(.2,.75,.25,1) both}.deck-mode .deck-active.deck-enter .section-label{animation:scene-in .4s ease-out both}
+@keyframes scene-in{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:780px){.deck-mode main>section:not(.hero){padding:calc(var(--hh) + 18px) 0 84px;justify-content:flex-start}.deck-mode .hero-inner{padding-bottom:100px}.deck-mode .hero-base{bottom:84px}.deck-mode .hero-main{padding-block:12px}.deck-mode .section h2{font-size:clamp(35px,8vw,53px)}.deck-mode .section-label{margin-bottom:23px}.deck-mode .about-intro,.deck-mode .heading-pair{gap:16px}.deck-mode .statements article{min-height:220px}.deck-mode .statement-text{padding:17px}.deck-mode .service-visual{min-height:180px}.deck-mode .service-visual svg{max-height:130px}.deck-mode .service-layout{gap:18px}.deck-mode .values-layout{gap:15px}.deck-mode .process-grid article:first-child{padding-left:18px}.deck-mode .deck-footer{flex-direction:column;gap:10px}.deck-links a{padding:8px 6px;font-size:10px}.deck-count{display:none}.deck-nav{gap:2px!important;padding:5px!important}.deck-arrow{min-width:28px}.deck-mode .hero h1{font-size:clamp(44px,11vw,74px)}}
+@media(max-width:370px){.deck-links a{padding:7px 4px;font-size:9px}.deck-arrow{min-width:24px}.deck-mode .hero-base .hero-loc{display:none}}
+@media(prefers-reduced-motion:reduce){.deck-mode .deck-enter>.wrap,.deck-mode .deck-enter .hero-main,.deck-mode .deck-enter .section-label{animation:none!important}}

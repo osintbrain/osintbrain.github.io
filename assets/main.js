@@ -1,147 +1,23 @@
 'use strict';
-
-const c = window.COMPANY || {};
-const $ = (s, root = document) => root.querySelector(s);
-const $$ = (s, root = document) => [...root.querySelectorAll(s)];
-const el = (tag, cls, text) => {
-  const node = document.createElement(tag);
-  if (cls) node.className = cls;
-  if (text !== undefined) node.textContent = text;
-  return node;
-};
-
-$$('[data-field]').forEach(node => {
-  node.textContent = c[node.dataset.field] ?? '';
-});
-
-const headline = $('#headline');
-if (headline) {
-  const phrase = c.headline || '';
-  const accent = c.accent || '';
-  const index = accent ? phrase.indexOf(accent) : -1;
-  if (index >= 0) {
-    headline.append(
-      document.createTextNode(phrase.slice(0, index)),
-      Object.assign(document.createElement('em'), { textContent: accent }),
-      document.createTextNode(phrase.slice(index + accent.length))
-    );
-  } else {
-    headline.textContent = phrase;
-  }
+const c=window.COMPANY||{}, $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], root=document.documentElement;
+const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
+$$('[data-field]').forEach(n=>n.textContent=c[n.dataset.field]??'');
+const headline=$('#headline');if(c.headline){headline.replaceChildren();const i=c.accent?c.headline.indexOf(c.accent):-1;if(i>0)headline.append(document.createTextNode(c.headline.slice(0,i).trim()),el('em','',c.accent+c.headline.slice(i+c.accent.length)));else headline.textContent=c.headline;}
+document.title=(c.name||'OSINT Brain')+' | Intelligence & Cybersecurity';$('#year').textContent=new Date().getFullYear();
+const art=$('#service-art'), NS='http://www.w3.org/2000/svg';
+function graphic(index){art.replaceChildren();const g=document.createElementNS(NS,'g');g.setAttribute('fill','none');g.setAttribute('stroke','currentColor');g.setAttribute('stroke-width','.8');art.append(g);function shape(tag,attrs){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));g.append(e);return e}function circle(x,y,r,o=1){shape('circle',{cx:x,cy:y,r,opacity:o})}function dot(x,y,r=2.7){shape('circle',{cx:x,cy:y,r,fill:'currentColor',stroke:'none'})}function path(d,o=1){shape('path',{d,opacity:o})}function rect(x,y,w,h){shape('rect',{x,y,width:w,height:h,rx:3})}const n=index%6;
+if(n===0){for(let i=0;i<6;i++)circle(250,160,22+i*20,.82-i*.085);for(let i=0;i<12;i++){const a=i*Math.PI/6;path(`M${250+Math.cos(a)*22} ${160+Math.sin(a)*22}L${250+Math.cos(a)*128} ${160+Math.sin(a)*128}`,.28);if(i%2===0)dot(250+Math.cos(a)*(62+(i%3)*20),160+Math.sin(a)*(62+(i%3)*20));}path('M250 160L364 106L369 137Z',.8);dot(250,160,4)}
+if(n===1){for(let j=0;j<4;j++){let k=j*14;path(`M250 ${36+k}L${356-k} ${77+k}V${151+k*.2}Q${356-k} ${232-k} 250 ${285-k}Q${144+k} ${232-k} ${144+k} ${151+k*.2}V${77+k}Z`,.8-j*.15)}path('M221 156l23 23 43-49',1);circle(250,160,65,.3)}
+if(n===2){for(let i=0;i<7;i++)path(`M66 ${260-i*33}H434`,.2);for(let j=0;j<11;j++)path(`M${70+j*36} 55V260`,.2);for(let k=0;k<4;k++){let d='M70 230';for(let j=1;j<10;j++)d+=` L${70+j*39} ${220-j*13+Math.sin(j*1.2+k)*30+k*9}`;path(d,.4+k*.15)}dot(421,90,4)}
+if(n===3){for(let j=0;j<3;j++)circle(250,160,100-j*28,.35);for(let i=0;i<18;i++){const a=i*2.39996,r=28+(i*37%98);let x=250+Math.cos(a)*r,y=160+Math.sin(a)*r;dot(x,y);path(`M250 160L${x} ${y}`,.25)}circle(250,160,32);path('M250 144v32m-16-16h32')}
+if(n===4){for(let j=0;j<4;j++){rect(130+j*18,70+j*17,180,145);for(let i=0;i<4;i++)path(`M${148+j*18} ${98+j*17+i*15}h${112-i*9}`,.42)}dot(382,254,4)}
+if(n===5){for(let j=0;j<8;j++){let a=j*Math.PI/4,x=250+Math.cos(a)*105,y=160+Math.sin(a)*105;circle(x,y,19);path(`M${250+Math.cos(a)*36} ${160+Math.sin(a)*36}L${x-Math.cos(a)*20} ${y-Math.sin(a)*20}`,.55);dot(x,y,3)}circle(250,160,35);circle(250,160,23,.5);dot(250,160,4)}
 }
+const services=c.services||[];function selectService(i){$$('.service-item').forEach((row,j)=>{const b=row.querySelector('button'),open=j===i;b.setAttribute('aria-expanded',String(open));b.querySelector('.sign').textContent=open?'−':'+';row.querySelector('p').hidden=!open});$('#visual-num').textContent=String(i+1).padStart(2,'0');$('#visual-caption').textContent=services[i]?.title||'';graphic(i);root.dataset.service=String(i);window.dispatchEvent(new Event('ob-service-change'))}
+services.forEach((s,i)=>{const row=el('article','service-item'),b=el('button'),p=el('p','',s.text);b.type='button';b.setAttribute('aria-expanded','false');p.id='service-detail-'+i;p.hidden=true;b.setAttribute('aria-controls',p.id);b.append(el('span','num',String(i+1).padStart(2,'0')),el('span','',s.title),el('span','sign','+'));b.addEventListener('click',()=>selectService(i));row.append(b,p);$('#service-grid').append(row)});if(services.length)selectService(0);
+(c.process||[]).forEach((s,i)=>{const a=el('article');a.append(el('small','','STEP '+String(i+1).padStart(2,'0')),el('h3','',s.title),el('p','',s.text));$('#process-grid').append(a)});
+function rows(items,selector,cls){items.forEach((s,i)=>{const a=el('article',cls),d=el('div');d.append(el('h3','',s.title),el('p','',s.text));a.append(el('small','',String(i+1).padStart(2,'0')),d);$(selector).append(a)})}rows(c.values||[],'#value-grid','value-row');rows(c.sectors||[{title:'Government & public sector',text:'Policy and strategic research.'},{title:'Corporate & enterprise',text:'Digital risk and decision support.'},{title:'Research & academia',text:'Evidence-based research.'},{title:'Security-conscious organizations',text:'Cybersecurity governance and awareness.'}],'#sector-grid','sector-row');
+let contacts=0;function link(label,url){const a=el('a','',label);a.href=url;if(url.startsWith('https://')){a.target='_blank';a.rel='noopener noreferrer'}a.append(el('span','','↗'));$('#contact-links').append(a);contacts++}if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email||''))link(c.email,'mailto:'+c.email);if(/^\d{8,15}$/.test(c.whatsapp||''))link('WhatsApp','https://wa.me/'+c.whatsapp);for(const [label,url] of [['LinkedIn',c.linkedin],['Instagram',c.instagram]])if(/^https:\/\//i.test(url||''))link(label,url);$('#contact-empty').hidden=contacts>0;
+const header=$('#site-header'),nav=$('#site-nav'),menu=$('#menu-toggle'),toggle=$('#theme-toggle');function syncHeader(){header.classList.toggle('scrolled',(root.classList.contains('deck-mode')?root.dataset.section!=='home':scrollY>16));header.classList.toggle('menu-open',nav.classList.contains('open'))}function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');syncHeader()}function theme(t,save){root.dataset.theme=t;toggle.setAttribute('aria-label','Switch to '+(t==='light'?'dark':'light')+' mode');$('meta[name="theme-color"]').content=t==='light'?'#f7f4f1':'#100e10';if(save)try{localStorage.setItem('ob-theme',t)}catch(e){}window.dispatchEvent(new Event('ob-theme-change'))}theme(root.dataset.theme==='light'?'light':'dark',false);toggle.onclick=()=>theme(root.dataset.theme==='light'?'dark':'light',true);menu.onclick=()=>{menu.setAttribute('aria-expanded',String(nav.classList.toggle('open')));syncHeader()};$$('#site-nav a').forEach(a=>a.addEventListener('click',closeMenu));window.addEventListener('scroll',syncHeader,{passive:true});window.addEventListener('pageshow',syncHeader);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){closeMenu();menu.focus()}});syncHeader();
 
-document.title = `${c.name || 'OSINT Brain'} | Intelligence, Cybersecurity & Strategy`;
-$('#year').textContent = new Date().getFullYear();
-
-const icons = {
-  scan: '<path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6M3 12h18"/><circle cx="12" cy="12" r="4"/>',
-  shield: '<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/>',
-  chart: '<path d="M3 3v18h18M7 15l5-5 4 3 5-7"/>',
-  search: '<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',
-  book: '<path d="M12 7v14M3 4h5c2 0 4 1 4 3 0-2 2-3 4-3h5v15h-5c-2 0-4 1-4 2-1-1-2-2-4-2H3Z"/>',
-  users: '<circle cx="9" cy="8" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M16 5a3 3 0 0 1 0 6m2 3c3 1 4 3 4 7"/>'
-};
-
-(c.services || []).forEach((item, i) => {
-  const card = el('article', 'capability-card');
-  const top = el('div', 'capability-meta');
-  const icon = el('span', 'capability-icon');
-  icon.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[item.icon] || icons.scan}</svg>`;
-  top.append(icon, el('span', 'card-index', String(i + 1).padStart(2, '0')));
-  card.append(top, el('h3', '', item.title), el('p', '', item.text));
-  $('#service-grid').append(card);
-});
-
-(c.process || []).forEach((item, i) => {
-  const card = el('article', 'method-card');
-  card.append(el('span', 'card-index', `Step ${String(i + 1).padStart(2, '0')}`), el('h3', '', item.title), el('p', '', item.text));
-  $('#process-grid').append(card);
-});
-
-(c.values || []).forEach((item, i) => {
-  const card = el('article', 'value-card');
-  card.append(el('span', 'card-index', String(i + 1).padStart(2, '0')), el('h3', '', item.title), el('p', '', item.text));
-  $('#value-grid').append(card);
-});
-
-let contacts = 0;
-const addContact = (label, url) => {
-  const a = el('a');
-  a.href = url;
-  a.textContent = label;
-  if (/^https?:\/\//i.test(url)) {
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-  }
-  const arrow = el('span', '', '↗');
-  a.append(arrow);
-  $('#contact-links').append(a);
-  contacts += 1;
-};
-if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email || '')) addContact(c.email, `mailto:${c.email}`);
-if (/^\d{8,15}$/.test(c.whatsapp || '')) addContact('WhatsApp', `https://wa.me/${c.whatsapp}`);
-[['LinkedIn', c.linkedin], ['Instagram', c.instagram]].forEach(([label, url]) => {
-  if (/^https:\/\//i.test(url || '')) addContact(label, url);
-});
-$('#contact-empty').hidden = contacts > 0;
-
-const root = document.documentElement;
-const header = $('#site-header');
-const nav = $('#site-nav');
-const menu = $('#menu-toggle');
-const toggle = $('#theme-toggle');
-const logo = $('#brand-logo');
-const metaTheme = $('meta[name="theme-color"]');
-
-function syncLogo() {
-  const theme = root.dataset.theme === 'light' ? 'light' : 'dark';
-  logo.src = theme === 'light' ? 'assets/logo-light.png' : 'assets/logo-dark.png';
-  metaTheme.content = theme === 'light' ? '#ffffff' : '#111214';
-}
-
-function applyTheme(theme, save = true) {
-  root.dataset.theme = theme === 'light' ? 'light' : 'dark';
-  syncLogo();
-  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-  toggle.setAttribute('aria-label', `Switch to ${next} mode`);
-  toggle.title = `Switch to ${next} mode`;
-  if (save) {
-    try { localStorage.setItem('ob-theme', root.dataset.theme); } catch (e) {}
-  }
-  window.dispatchEvent(new Event('ob-theme-change'));
-}
-
-function syncHeader() {
-  const active = window.scrollY > 16;
-  header.classList.toggle('scrolled', active);
-  header.classList.toggle('menu-open', nav.classList.contains('open'));
-}
-
-function closeMenu() {
-  nav.classList.remove('open');
-  menu.setAttribute('aria-expanded', 'false');
-  syncHeader();
-}
-
-applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark', false);
-syncHeader();
-
-toggle.addEventListener('click', () => {
-  applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light', true);
-});
-
-menu.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  menu.setAttribute('aria-expanded', String(open));
-  syncHeader();
-});
-
-$$('#site-nav a').forEach(link => link.addEventListener('click', closeMenu));
-window.addEventListener('scroll', syncHeader, { passive: true });
-window.addEventListener('pageshow', syncHeader);
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && nav.classList.contains('open')) {
-    closeMenu();
-    menu.focus();
-  }
-});
+const closingList=$("#closing-services");if(closingList)services.forEach((s,i)=>{const a=el("a","",s.title);a.href="#capabilities";a.addEventListener("click",()=>selectService(i));closingList.append(a)});$(".closing-year").textContent=new Date().getFullYear();
