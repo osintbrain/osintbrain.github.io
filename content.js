@@ -1,41 +1,40 @@
-/* EDIT FILE INI UNTUK MENGUBAH ISI WEBSITE. Simpan, lalu refresh browser. */
+/* Edit this file to update your company information. Save and refresh. */
 window.COMPANY = {
   name: 'OSINT Brain',
   label: 'INTELLIGENCE · CYBERSECURITY · RESEARCH',
-  headline: 'Kejelasan di tengah kompleksitas informasi.',
-  accent: 'kompleksitas informasi.',
-  description: 'OSINT Brain mengintegrasikan riset sumber terbuka, analisis keamanan siber, dan wawasan strategis untuk mendukung pengambilan keputusan berbasis bukti.',
-  aboutTitle: 'Informasi menjadi wawasan. Wawasan menjadi keputusan.',
-  about: 'Kami berfokus pada pemahaman lingkungan informasi dan risiko digital melalui pendekatan yang sistematis, objektif, dan bertanggung jawab. OSINT Brain dibangun dengan semangat ketelitian analitis dan penghormatan terhadap privasi serta hukum yang berlaku.',
-  vision: 'Menjadi mitra riset dan analisis yang tepercaya dalam menghadapi dinamika keamanan dan informasi digital.',
-  mission: 'Menghasilkan wawasan yang relevan, terukur, dan dapat dipertanggungjawabkan untuk membantu pemangku kepentingan mengambil keputusan.',
+  headline: 'Clarity in a complex information landscape.',
+  accent: 'complex information landscape.',
+  description: 'OSINT Brain brings together open-source research, cybersecurity analysis, and strategic insight to support evidence-based decision-making.',
+  aboutTitle: 'Information into insight. Insight into decisions.',
+  about: 'We focus on understanding the information environment and digital risk through a systematic, objective, and responsible approach. OSINT Brain is built on analytical rigor, respect for privacy, and compliance with applicable law.',
+  vision: 'To become a trusted research and analysis partner in an evolving digital security and information landscape.',
+  mission: 'To deliver relevant, measurable, and accountable insights that help stakeholders make informed decisions.',
   services: [
-    {icon:'scan', title:'Open Source Intelligence', text:'Riset dan analisis informasi dari sumber terbuka yang sah untuk memahami isu, konteks, dan risiko.'},
-    {icon:'shield', title:'Cybersecurity', text:'Kajian risiko keamanan informasi dan rekomendasi penguatan tata kelola serta ketahanan digital.'},
-    {icon:'chart', title:'Strategic Intelligence', text:'Analisis perkembangan lingkungan strategis, skenario, dan implikasinya terhadap organisasi.'},
-    {icon:'search', title:'Digital Risk Analysis', text:'Evaluasi risiko reputasi dan paparan informasi publik secara etis dan berbasis bukti.'},
-    {icon:'book', title:'Research & Advisory', text:'Kajian tematik, riset kebijakan, dan masukan strategis sesuai kebutuhan pemangku kepentingan.'},
-    {icon:'users', title:'Training & Awareness', text:'Pengembangan pemahaman mengenai OSINT, literasi informasi, dan kesadaran keamanan digital.'}
+    {icon:'scan', title:'Open Source Intelligence', text:'Research and analysis of lawfully accessible information to understand issues, context, and risk.'},
+    {icon:'shield', title:'Cybersecurity', text:'Information security risk assessment and recommendations to strengthen governance and digital resilience.'},
+    {icon:'chart', title:'Strategic Intelligence', text:'Analysis of strategic developments, emerging scenarios, and organizational implications.'},
+    {icon:'search', title:'Digital Risk Analysis', text:'Ethical, evidence-based assessment of reputational risk and public information exposure.'},
+    {icon:'book', title:'Research & Advisory', text:'Thematic studies, policy research, and strategic advice tailored to stakeholder needs.'},
+    {icon:'users', title:'Training & Awareness', text:'Education in OSINT, information literacy, and digital security awareness.'}
   ],
   values: [
-    {title:'Evidence-driven', text:'Mengutamakan bukti, verifikasi, dan keterlacakan sumber.'},
-    {title:'Independent thinking', text:'Memisahkan fakta, asumsi, interpretasi, dan ketidakpastian.'},
-    {title:'Responsible intelligence', text:'Menempatkan legalitas, etika, dan privasi sebagai prinsip kerja.'}
+    {title:'Evidence-driven', text:'Prioritizing evidence, verification, and source traceability.'},
+    {title:'Independent thinking', text:'Distinguishing facts, assumptions, interpretations, and uncertainty.'},
+    {title:'Responsible intelligence', text:'Upholding legality, ethics, and privacy as core working principles.'}
   ],
   process: [
-    {title:'Define', text:'Memahami kebutuhan dan ruang lingkup.'},
-    {title:'Research', text:'Menghimpun informasi yang relevan dan sah.'},
-    {title:'Analyze', text:'Memvalidasi, menghubungkan, dan mengevaluasi bukti.'},
-    {title:'Deliver', text:'Menyampaikan wawasan dan rekomendasi yang jelas.'}
+    {title:'Define', text:'Understand objectives and scope.'},
+    {title:'Research', text:'Collect relevant, lawfully accessible information.'},
+    {title:'Analyze', text:'Validate, connect, and evaluate the evidence.'},
+    {title:'Deliver', text:'Communicate clear insights and actionable recommendations.'}
   ],
-  contactTitle:'Mari mulai percakapan.',
-  contactText:'Diskusikan kebutuhan riset, analisis strategis, atau keamanan digital organisasi Anda.',
-  email:'', // contoh: 'info@domainanda.com'
-  whatsapp:'', // format internasional tanpa +, contoh '6281234567890'
-  linkedin:'', // URL lengkap https://...
-  instagram:'', // URL lengkap https://...
+  contactTitle:'Let’s start a conversation.',
+  contactText:'Discuss your organization’s research, strategic analysis, or digital security needs with us.',
+  email:'', // e.g. 'info@example.com'
+  whatsapp:'', // international format, digits only
+  linkedin:'', // full https:// URL
+  instagram:'', // full https:// URL
   location:'Indonesia',
-  // Biarkan kosong jika tidak ingin menampilkan tautan.
   copyright:'OSINT Brain',
-  disclaimer:'Seluruh layanan dilaksanakan dalam ruang lingkup yang sah, terotorisasi, dan menghormati privasi.'
+  disclaimer:'All services are conducted within lawful, authorized scopes and with respect for privacy.'
 };
