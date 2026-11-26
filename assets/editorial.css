@@ -17,3 +17,9 @@ body{font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:-.012em}h1,h2{
 @media(prefers-reduced-motion:reduce){.ambient-light::before,.deck-mode .deck-active.deck-enter .motion-item,#contact-dialog[open]{animation:none!important;filter:none!important;clip-path:none!important}}
 
 @media(min-width:781px){.deck-mode #contact{padding-bottom:clamp(155px,23vh,225px)}}
+
+/* v3.1 — Contact only: full-viewport brand mark behind the existing copy. */
+.deck-mode #contact .contact-intro{position:relative;isolation:isolate;}
+.deck-mode #contact .contact-intro::before{content:"";position:absolute;z-index:-1;inset:-72px -95px;pointer-events:none;background:radial-gradient(ellipse at center,color-mix(in srgb,var(--bg) 88%,transparent) 0%,color-mix(in srgb,var(--bg) 72%,transparent) 40%,transparent 76%);}
+.deck-mode #contact .contact-intro h2{text-shadow:0 2px 18px var(--bg);}
+@media(max-width:780px){.deck-mode #contact .contact-intro::before{inset:-44px -26px;}}

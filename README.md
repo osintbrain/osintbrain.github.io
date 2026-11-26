@@ -23,3 +23,6 @@ Test delivery on the live HTTPS site. FormSubmit requires email activation if no
 
 ## QA limitations
 Desktop and mobile viewport checks used Chromium's Canvas2D fallback (no usable WebGL in this environment). GPU rendering, physical-device swipes and real FormSubmit delivery are not verified. Test the standalone preview before publishing. Existing live repository content has not been fetched; use the update-only package to preserve your edits.
+
+## v3.1 — Contact particle logo
+Contact uses the uploaded brain/magnifier symbol sampled into a responsive, full-screen point cloud. Dark/light modes, navigation and form behavior remain unchanged. Update `index.html`, `assets/motion.js`, and `assets/editorial.css` from v3.0. Preview form submissions are disabled; live FormSubmit settings are unchanged.
