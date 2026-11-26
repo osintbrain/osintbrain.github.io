@@ -1,10 +1,183 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#131416"><meta name="color-scheme" content="dark light"><meta name="description" content="OSINT Brain — Open Source Intelligence, Cybersecurity & Strategic Research."><title>OSINT Brain | Intelligence & Cybersecurity</title><link rel="icon" href="assets/logo.png"><script>try{document.documentElement.dataset.theme=localStorage.getItem("ob-theme")==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script><link rel="stylesheet" href="assets/style.css"><script src="content.js" defer></script><script src="assets/main.js" defer></script><script src="assets/neural.js" defer></script></head>
-<body><a class="skip" href="#main">Skip to content</a><header><div class="wrap nav"><a class="brand" href="#home"><img src="assets/logo.png" alt="OSINT Brain"></a><div class="nav-tools"><button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch color theme"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M19 5l-1.5 1.5m-11 11L5 19"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 14.1A9 9 0 0 1 9.9 3.2 9 9 0 1 0 20.8 14.1Z"/></svg></button><button class="menu" aria-label="Open menu" aria-expanded="false" aria-controls="navigation">☰</button></div><nav id="navigation"><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#approach">Our approach</a><a class="btn small" href="#contact">Contact us <span>↗</span></a></nav></div></header>
-<main id="main"><section id="home" class="hero"><div class="neural-background" aria-hidden="true"><canvas id="neural-canvas"></canvas></div><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow"><span class="status"></span><span data-field="label"></span></p><h1 id="headline"></h1><p class="lead" data-field="description"></p><div class="actions"><a class="btn" href="#services">Explore our services <span>↗</span></a><a class="btn outline" href="#about">About us <span>↓</span></a></div><div class="hero-note"><span></span> OPEN SOURCE. CLEAR INSIGHT. RESPONSIBLE ACTION.</div></div></div></section>
-<div class="principles"><div class="wrap principle-grid"><span><b>01</b> INTEGRITY</span><span><b>02</b> OBJECTIVITY</span><span><b>03</b> CONFIDENTIALITY</span><span><b>04</b> ACCOUNTABILITY</span></div></div>
-<section id="about" class="section"><div class="wrap about-grid"><div><p class="eyebrow">01 / ABOUT US</p><h2 data-field="aboutTitle"></h2><p class="muted" data-field="about"></p></div><div class="vision-grid"><article class="panel"><span class="index">01 / VISION</span><h3>Vision</h3><p data-field="vision"></p></article><article class="panel"><span class="index">02 / MISSION</span><h3>Mission</h3><p data-field="mission"></p></article></div></div></section>
-<section id="services" class="section tinted"><div class="wrap"><div class="section-head"><div><p class="eyebrow">02 / WHAT WE DO</p><h2>Solutions & services.</h2></div><p class="muted">Our approach lintas disiplin untuk memahami tantangan informasi dan keamanan digital.</p></div><div id="service-grid" class="service-grid"></div></div></section>
-<section id="approach" class="section"><div class="wrap"><p class="eyebrow">03 / OUR APPROACH</p><h2>A structured approach.</h2><p class="muted">From defining your needs to delivering recommendations, every stage has a clear purpose.</p><div class="process-grid" id="process-grid"></div><div class="values"><div><p class="eyebrow">04 / OUR VALUES</p><h2>The principles we stand by.</h2></div><div id="value-grid"></div></div></div></section>
-<section id="contact" class="section contact"><div class="wrap contact-grid"><div><p class="eyebrow">05 / GET IN TOUCH</p><h2 data-field="contactTitle"></h2><p class="muted" data-field="contactText"></p></div><div class="contact-box"><h3>Company contact</h3><p data-field="location"></p><div id="contact-links"></div><p class="note" id="contact-empty">Contact details will be available soon.</p></div></div></section></main>
-<footer><div class="wrap footer-main"><a class="brand" href="#home"><span><strong data-field="name"></strong><small>INTELLIGENCE SOLUTIONS</small></span></a><p data-field="disclaimer"></p><a href="#home" class="back">Back to top ↑</a></div><div class="wrap footer-bottom"><span>© <span id="year"></span> <span data-field="copyright"></span>. All rights reserved.</span><span>INTELLIGENCE THROUGH EVIDENCE</span></div></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111214">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="OSINT Brain — Open-source intelligence, cybersecurity, and strategic analysis.">
+  <title>OSINT Brain | Intelligence, Cybersecurity & Strategy</title>
+  <link rel="icon" href="assets/logo-light.png">
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem('ob-theme') === 'light' ? 'light' : 'dark';
+    } catch (e) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  </script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="content.js" defer></script>
+  <script src="assets/main.js" defer></script>
+  <script src="assets/neural.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="#home" aria-label="OSINT Brain home">
+        <img id="brand-logo" src="assets/logo-dark.png" alt="OSINT Brain">
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#method">Method</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">
+          <span class="theme-icon sun">☼</span>
+          <span class="theme-icon moon">◐</span>
+        </button>
+        <a class="nav-cta" href="#contact">Start a conversation</a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="neural-background" aria-hidden="true">
+        <canvas id="neural-canvas"></canvas>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <p class="eyebrow" data-field="label"></p>
+        <h1 id="headline"></h1>
+        <p class="hero-copy" data-field="description"></p>
+        <div class="hero-actions">
+          <a class="button primary" href="#capabilities">Explore capabilities</a>
+          <a class="button secondary" href="#about">Company overview</a>
+        </div>
+        <ul class="hero-points">
+          <li>Open-source intelligence</li>
+          <li>Cybersecurity advisory</li>
+          <li>Strategic research & risk analysis</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section surface-primary" id="about">
+      <div class="container">
+        <div class="section-intro">
+          <p class="eyebrow">About us</p>
+          <h2 data-field="aboutTitle"></h2>
+        </div>
+        <div class="about-layout">
+          <div class="about-copy">
+            <p data-field="about"></p>
+          </div>
+          <div class="statement-grid">
+            <article class="statement-card">
+              <span class="statement-index">01</span>
+              <h3>Vision</h3>
+              <p data-field="vision"></p>
+            </article>
+            <article class="statement-card">
+              <span class="statement-index">02</span>
+              <h3>Mission</h3>
+              <p data-field="mission"></p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-secondary" id="capabilities">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Capabilities</p>
+            <h2>What we help organizations do.</h2>
+          </div>
+          <p class="section-note">A focused service architecture for research, cyber risk, intelligence support, and executive decision-making.</p>
+        </div>
+        <div class="capability-grid" id="service-grid"></div>
+      </div>
+    </section>
+
+    <section class="section surface-primary" id="method">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Method</p>
+            <h2>A structured way of working.</h2>
+          </div>
+          <p class="section-note">We follow a disciplined process so that outputs remain clear, defensible, and useful in practice.</p>
+        </div>
+        <div class="method-grid" id="process-grid"></div>
+        <div class="values-shell">
+          <div class="values-intro">
+            <p class="eyebrow">Principles</p>
+            <h2>The standards behind our work.</h2>
+          </div>
+          <div class="value-grid" id="value-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-secondary" id="sectors">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Sectors</p>
+            <h2>Built for complex information environments.</h2>
+          </div>
+          <p class="section-note">Use these sections as editable placeholders for the markets, mandates, or domains your company primarily serves.</p>
+        </div>
+        <div class="sector-grid">
+          <article class="sector-card"><h3>Government & public sector</h3><p>Strategic analysis, policy context, and information environment assessment.</p></article>
+          <article class="sector-card"><h3>Corporate & enterprise</h3><p>Reputation exposure, executive risk awareness, and digital threat context.</p></article>
+          <article class="sector-card"><h3>Research & academia</h3><p>Evidence-based inquiry, thematic studies, and analytical publications.</p></article>
+          <article class="sector-card"><h3>Security-conscious organizations</h3><p>Advisory support for cyber posture, awareness, and responsible intelligence use.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section surface-primary" id="contact">
+      <div class="container contact-layout">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2 data-field="contactTitle"></h2>
+          <p class="section-note" data-field="contactText"></p>
+        </div>
+        <div class="contact-card">
+          <h3>Company details</h3>
+          <p class="location" data-field="location"></p>
+          <div id="contact-links" class="contact-links"></div>
+          <p class="contact-empty" id="contact-empty">Contact details can be added here when ready.</p>
+          <div class="contact-footnote" data-field="disclaimer"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-shell">
+      <div>
+        <strong data-field="name"></strong>
+        <p>Intelligence through evidence.</p>
+      </div>
+      <div class="footer-meta">
+        <span>© <span id="year"></span> <span data-field="copyright"></span></span>
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,19 +1,147 @@
 'use strict';
-const c=window.COMPANY;
-const q=(s)=>document.querySelector(s);
-const make=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
-document.querySelectorAll('[data-field]').forEach(e=>{e.textContent=c[e.dataset.field]??'';});
-const h=q('#headline');const i=c.headline.indexOf(c.accent);if(c.accent&&i>=0){h.append(document.createTextNode(c.headline.slice(0,i)),make('em','',c.accent),document.createTextNode(c.headline.slice(i+c.accent.length)));}else h.textContent=c.headline;
-document.title=c.name+' | Intelligence & Cybersecurity';q('#year').textContent=new Date().getFullYear();
-const icons={scan:'<path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6M3 12h18"/><circle cx="12" cy="12" r="4"/>',shield:'<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/>',chart:'<path d="M3 3v18h18M7 15l5-5 4 3 5-7"/>',search:'<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',book:'<path d="M12 7v14M3 4h5c2 0 4 1 4 3 0-2 2-3 4-3h5v15h-5c-2 0-4 1-4 2-1-1-2-2-4-2H3Z"/>',users:'<circle cx="9" cy="8" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M16 5a3 3 0 0 1 0 6m2 3c3 1 4 3 4 7"/>'};
-c.services.forEach((s,i)=>{const a=make('article','service');const top=make('div','service-top');const icon=make('span');icon.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+(icons[s.icon]||icons.scan)+'</svg>';top.append(icon,make('span','index',String(i+1).padStart(2,'0')+' / SERVICE'));a.append(top,make('h3','',s.title),make('p','',s.text));q('#service-grid').append(a);});
-c.process.forEach((s,i)=>{const a=make('article','process');a.append(make('span','index','STEP '+String(i+1).padStart(2,'0')),make('h3','',s.title),make('p','',s.text));q('#process-grid').append(a);});
-c.values.forEach((s,i)=>{const a=make('article','value'),b=make('div');b.append(make('h3','',s.title),make('p','',s.text));a.append(make('span','index',String(i+1).padStart(2,'0')),b);q('#value-grid').append(a);});
-let contacts=0;function link(label,url){const a=make('a','',label+' ↗');a.href=url;if(url.startsWith('https://')){a.target='_blank';a.rel='noopener noreferrer';}q('#contact-links').append(a);contacts++;}if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))link(c.email,'mailto:'+c.email);if(/^\d{8,15}$/.test(c.whatsapp))link('WhatsApp','https://wa.me/'+c.whatsapp);for(const [label,url] of [['LinkedIn',c.linkedin],['Instagram',c.instagram]])if(/^https:\/\//i.test(url))link(label,url);q('#contact-empty').hidden=contacts>0;
-const menu=q('.menu'),nav=q('#navigation');menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
-// Theme preference persists on the same browser; header is fixed and becomes opaque on scroll.
-const root=document.documentElement,header=q('header'),toggle=q('#theme-toggle');
-function applyTheme(theme,save){root.dataset.theme=theme;const next=theme==='light'?'dark':'light';toggle.setAttribute('aria-label','Switch to '+next+' mode');toggle.title='Switch to '+next+' mode';q('meta[name="theme-color"]').content=theme==='light'?'#fffaf7':'#131416';if(save)try{localStorage.setItem('ob-theme',theme);}catch(e){}window.dispatchEvent(new Event('ob-theme-change'));}
-applyTheme(root.dataset.theme==='light'?'light':'dark',false);toggle.addEventListener('click',()=>applyTheme(root.dataset.theme==='light'?'dark':'light',true));
-function syncHeader(){header.classList.toggle('scrolled',window.scrollY>16);header.classList.toggle('menu-open',nav.classList.contains('open'));}
-window.addEventListener('scroll',syncHeader,{passive:true});menu.addEventListener('click',syncHeader);nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',syncHeader));window.addEventListener('pageshow',syncHeader);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');syncHeader();menu.focus();}});syncHeader();
+
+const c = window.COMPANY || {};
+const $ = (s, root = document) => root.querySelector(s);
+const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+const el = (tag, cls, text) => {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+$$('[data-field]').forEach(node => {
+  node.textContent = c[node.dataset.field] ?? '';
+});
+
+const headline = $('#headline');
+if (headline) {
+  const phrase = c.headline || '';
+  const accent = c.accent || '';
+  const index = accent ? phrase.indexOf(accent) : -1;
+  if (index >= 0) {
+    headline.append(
+      document.createTextNode(phrase.slice(0, index)),
+      Object.assign(document.createElement('em'), { textContent: accent }),
+      document.createTextNode(phrase.slice(index + accent.length))
+    );
+  } else {
+    headline.textContent = phrase;
+  }
+}
+
+document.title = `${c.name || 'OSINT Brain'} | Intelligence, Cybersecurity & Strategy`;
+$('#year').textContent = new Date().getFullYear();
+
+const icons = {
+  scan: '<path d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6M3 12h18"/><circle cx="12" cy="12" r="4"/>',
+  shield: '<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/>',
+  chart: '<path d="M3 3v18h18M7 15l5-5 4 3 5-7"/>',
+  search: '<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',
+  book: '<path d="M12 7v14M3 4h5c2 0 4 1 4 3 0-2 2-3 4-3h5v15h-5c-2 0-4 1-4 2-1-1-2-2-4-2H3Z"/>',
+  users: '<circle cx="9" cy="8" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M16 5a3 3 0 0 1 0 6m2 3c3 1 4 3 4 7"/>'
+};
+
+(c.services || []).forEach((item, i) => {
+  const card = el('article', 'capability-card');
+  const top = el('div', 'capability-meta');
+  const icon = el('span', 'capability-icon');
+  icon.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[item.icon] || icons.scan}</svg>`;
+  top.append(icon, el('span', 'card-index', String(i + 1).padStart(2, '0')));
+  card.append(top, el('h3', '', item.title), el('p', '', item.text));
+  $('#service-grid').append(card);
+});
+
+(c.process || []).forEach((item, i) => {
+  const card = el('article', 'method-card');
+  card.append(el('span', 'card-index', `Step ${String(i + 1).padStart(2, '0')}`), el('h3', '', item.title), el('p', '', item.text));
+  $('#process-grid').append(card);
+});
+
+(c.values || []).forEach((item, i) => {
+  const card = el('article', 'value-card');
+  card.append(el('span', 'card-index', String(i + 1).padStart(2, '0')), el('h3', '', item.title), el('p', '', item.text));
+  $('#value-grid').append(card);
+});
+
+let contacts = 0;
+const addContact = (label, url) => {
+  const a = el('a');
+  a.href = url;
+  a.textContent = label;
+  if (/^https?:\/\//i.test(url)) {
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+  }
+  const arrow = el('span', '', '↗');
+  a.append(arrow);
+  $('#contact-links').append(a);
+  contacts += 1;
+};
+if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email || '')) addContact(c.email, `mailto:${c.email}`);
+if (/^\d{8,15}$/.test(c.whatsapp || '')) addContact('WhatsApp', `https://wa.me/${c.whatsapp}`);
+[['LinkedIn', c.linkedin], ['Instagram', c.instagram]].forEach(([label, url]) => {
+  if (/^https:\/\//i.test(url || '')) addContact(label, url);
+});
+$('#contact-empty').hidden = contacts > 0;
+
+const root = document.documentElement;
+const header = $('#site-header');
+const nav = $('#site-nav');
+const menu = $('#menu-toggle');
+const toggle = $('#theme-toggle');
+const logo = $('#brand-logo');
+const metaTheme = $('meta[name="theme-color"]');
+
+function syncLogo() {
+  const theme = root.dataset.theme === 'light' ? 'light' : 'dark';
+  logo.src = theme === 'light' ? 'assets/logo-light.png' : 'assets/logo-dark.png';
+  metaTheme.content = theme === 'light' ? '#ffffff' : '#111214';
+}
+
+function applyTheme(theme, save = true) {
+  root.dataset.theme = theme === 'light' ? 'light' : 'dark';
+  syncLogo();
+  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  toggle.setAttribute('aria-label', `Switch to ${next} mode`);
+  toggle.title = `Switch to ${next} mode`;
+  if (save) {
+    try { localStorage.setItem('ob-theme', root.dataset.theme); } catch (e) {}
+  }
+  window.dispatchEvent(new Event('ob-theme-change'));
+}
+
+function syncHeader() {
+  const active = window.scrollY > 16;
+  header.classList.toggle('scrolled', active);
+  header.classList.toggle('menu-open', nav.classList.contains('open'));
+}
+
+function closeMenu() {
+  nav.classList.remove('open');
+  menu.setAttribute('aria-expanded', 'false');
+  syncHeader();
+}
+
+applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark', false);
+syncHeader();
+
+toggle.addEventListener('click', () => {
+  applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light', true);
+});
+
+menu.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  menu.setAttribute('aria-expanded', String(open));
+  syncHeader();
+});
+
+$$('#site-nav a').forEach(link => link.addEventListener('click', closeMenu));
+window.addEventListener('scroll', syncHeader, { passive: true });
+window.addEventListener('pageshow', syncHeader);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && nav.classList.contains('open')) {
+    closeMenu();
+    menu.focus();
+  }
+});

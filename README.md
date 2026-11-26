@@ -1,21 +1,69 @@
-# OSINT Brain v1.4 — Burgundy Dual Theme
+# OSINT Brain — Corporate Landing Page v1.5
 
-Static English company profile. No build, dependencies, database, or external CDN.
+A cleaner, more professional, GitHub Pages-ready company landing page for OSINT Brain.
 
-## Preview
-Open index.html in a browser after extracting the entire ZIP. The standalone preview HTML is separate from the deployment package.
+## What's new in v1.5
 
-## Edit
-Edit content.js for the company profile, headline, services, and contact details. Replace assets/logo.png if needed. All placeholder company copy should be verified before publication. The original uploaded burgundy logo is used; dark mode uses a CSS brightness adjustment for legibility.
+- Refined the overall layout to feel more like a professional corporate site rather than an AI-generated concept.
+- Uses **two different logo files** depending on the theme:
+  - **Dark mode** → white logo
+  - **Light mode** → burgundy logo
+- Transparent header with a subtle shiny glow at the top of the page.
+- Header stays fixed and becomes **solid on scroll**.
+- Header color behavior:
+  - **Dark mode** → header content is white
+  - **Light mode** → header content is `#91263e`
+- Section colors alternate exactly as requested:
+  - **Dark mode** → charcoal / white / charcoal / white
+  - **Light mode** → `#91263e` / white / `#91263e` / white
+- Fullscreen interactive neural background remains only in the Home section.
+- Entire site content is in English.
+- No framework, no build step, no database.
 
-## GitHub Pages
-1. Back up your current repository and any edits to content.js.
-2. Extract the ZIP and upload its contents (not the ZIP or its enclosing folder) into the repository root on the main branch.
-3. Commit changes. For a new site, choose Settings > Pages > Deploy from a branch > main > /(root) > Save.
-4. Check Actions and open the URL shown under Settings > Pages. For a public GitHub Free repository, GitHub Pages is available subject to GitHub's terms and limits.
-5. Reload the site and verify the header, theme switch, mobile menu, and links.
+## Files
 
-The update-only package contains the changed files, including content.js (English copy). If you already customized that file, merge the English translations manually rather than replacing your edits. No credentials or private data should be committed.
+```text
+osint-brain-v1.5/
+├── index.html
+├── content.js
+├── README.md
+└── assets/
+    ├── logo-dark.png
+    ├── logo-light.png
+    ├── style.css
+    ├── main.js
+    └── neural.js
+```
 
-## Theme
-Default dark; the header toggle stores the preference locally when browser storage is available. The header is transparent at the top, and opaque while scrolled or the mobile menu is open. The canvas spans the complete Home section. Animation follows pointer interaction and respects reduced-motion preferences automatically.
+## How to edit content
+
+Open `content.js` and edit the text values there.
+
+You can change:
+- company name
+- hero text
+- about text
+- services
+- method steps
+- values
+- contact information
+
+## GitHub Pages deployment
+
+1. Create a **public** GitHub repository.
+2. Upload all files from this folder.
+3. Go to **Settings → Pages**.
+4. Under **Build and deployment**, choose:
+   - **Source:** Deploy from a branch
+   - **Branch:** `main`
+   - **Folder:** `/root`
+5. Save.
+6. Your site will be live at:
+
+```text
+https://YOUR-GITHUB-USERNAME.github.io/REPOSITORY-NAME/
+```
+
+## Important note
+
+This starter version is intentionally editable. It is designed as a professional shell that you can customize with your actual company profile, services, and contact details later.
